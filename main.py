@@ -4,10 +4,10 @@ from os.path import isdir, join
 class Reader:
     totalLines = 0
 
-    def startReading(self, path):
+    def start_reading(self, path):
         if not isdir(path):
             # no need to list files
-            self.readLines(path)
+            self.read_lines(path)
             return
 
         print("\n Listing all the files and subdirs under current directory...")
@@ -16,19 +16,18 @@ class Reader:
 
         for c in list_:
             if isdir(join(path, c)):
-                currentPath = join(path, c)
+                current_path = join(path, c)
                 print("\n"+ c + " is a directory!")
                 print("Accessing it...")
-                self.startReading(currentPath)
+                self.start_reading(current_path)
                 continue
 
             # if it is a file, read the total lines of code
             print(c + " is a file...reading the total lines...")
             filepath = join(path, c)
-            self.readLines(filepath)
-            
+            self.read_lines(filepath)
 
-    def readLines(self, filepath):
+    def read_lines(self, filepath):
         with open(filepath, encoding="utf-8") as f:
             content = f.read()
             splits = content.split("\n")
@@ -40,8 +39,8 @@ class Reader:
 class Main:
     def __init__(self):
         reader = Reader()
-        initPath = input("Enter the absolute path of the project: ")
-        reader.startReading(initPath)
+        init_path = input("Enter the absolute path of the project: ")
+        reader.start_reading(init_path)
         print("\nTOTAL LINES OF CODE IN THE CURRENT PROJECT IS: "  + str(reader.totalLines) )
 
 Main()
