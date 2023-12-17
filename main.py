@@ -2,7 +2,7 @@ from os import listdir
 from os.path import isdir, join
 
 class Reader:
-    totalLines = 0
+    total_lines_of_code = 0
     skip_pop_up = False
     files_to_ignore = []
 
@@ -12,7 +12,6 @@ class Reader:
             self.read_lines(path, path)
             return
 
-        # print("\nListing all the files and subdirs under current directory...")
         list_ = listdir(path)
         print("\nFound "+str(len(list_))+" file(s) under present directory!")
 
@@ -50,13 +49,12 @@ class Reader:
             self.read_lines(filepath, c)
 
     def read_lines(self, filepath, filename):
-
         with open(filepath, encoding="utf-8") as f:
             content = f.read()
             splits = content.split("\n")
             lines = len(splits) - 1
             print("No. of lines in "+filename+" is: "+str(lines))
-            self.totalLines = self.totalLines + lines
+            self.total_lines_of_code = self.total_lines_of_code + lines
 
 
 class Main:
@@ -64,6 +62,7 @@ class Main:
         reader = Reader()
         init_path = input("Enter the absolute path of the project: ")
         reader.start_reading(init_path)
-        print("\nTOTAL LINES OF CODE IN THE CURRENT PROJECT IS: "  + str(reader.totalLines) )
+        print("\nTOTAL LINES OF CODE IN THE CURRENT PROJECT IS: "  + str(reader.total_lines_of_code) )
+
 
 Main()
